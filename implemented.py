@@ -2,6 +2,7 @@ from dao.user import UserDAO
 from dao.director import DirectorDAO
 from dao.genre import GenreDAO
 from dao.movie import MovieDAO
+from service.auth import AuthService
 from service.user import UserService
 from service.director import DirectorService
 from service.genre import GenreService
@@ -17,3 +18,4 @@ user_service = UserService(dao=user_dao)
 director_service = DirectorService(dao=director_dao)
 genre_service = GenreService(dao=genre_dao)
 movie_service = MovieService(dao=movie_dao)
+auth_service = AuthService(user_service)

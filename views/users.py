@@ -10,8 +10,8 @@ user_ns = Namespace('users')
 @user_ns.route('/')
 class UsersView(Resource):
     def get(self):
-        rs = user_service.get_all()
-        res = UserSchema(many=True).dump(rs)
+        users = user_service.get_all()
+        res = UserSchema(many=True).dump(users)
         return res, 200
 
     def post(self):
@@ -24,8 +24,8 @@ class UsersView(Resource):
 @user_ns.route('/<int:rid>')
 class UserView(Resource):
     def get(self, rid):
-        r = user_service.get_one(rid)
-        sm_d = UserSchema().dump(r)
+        user = user_service.get_one(rid)
+        sm_d = UserSchema().dump(user)
         return sm_d, 200
 
     def put(self, rid):
