@@ -30,13 +30,14 @@ class UserService:
     def delete(self, rid):
         self.dao.delete(rid)
 
-    def get_hash(password):
-        return hashlib.pbkdf2_hmac(
+    def get_hash(self, password):
+        hash_digest = hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),  # Convert the password to bytes
             Config.PWD_HASH_SALT,
             Config.PWD_HASH_ITERATIONS
-        ).decode("utf-8", "ignore")
+        )
+        return base64.b64encode(hash_digest)
 
     def comprare_password(self, hash, password):
         decode_digest = base64.b64decode(hash)

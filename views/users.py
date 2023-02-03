@@ -16,9 +16,9 @@ class UsersView(Resource):
 
     def post(self):
         req_json = request.json
-        user_service.create(req_json)
+        user = user_service.create(req_json)
 
-        return "", 201
+        return "", 201, {'location': f'/users/{user.id}'}
 
 
 @user_ns.route('/<int:rid>')

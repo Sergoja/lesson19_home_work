@@ -27,11 +27,11 @@ class AuthService:
 
         min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
         data["exp"] = calendar.timegm(min30.timetuple())
-        access_token = jwt.encode(data, Config.SECRET_HERE, algoritms=[Config.JWT_ALGORITHM])
+        access_token = jwt.encode(data, Config.SECRET_HERE, algorithm=Config.JWT_ALGORITHM)
 
         days30 = datetime.datetime.utcnow() + datetime.timedelta(days=30)
         data["exp"] = calendar.timegm(days30.timetuple())
-        refresh_token = jwt.encode(data, Config.SECRET_HERE, algoritms=[Config.JWT_ALGORITHM])
+        refresh_token = jwt.encode(data, Config.SECRET_HERE, algorithm=Config.JWT_ALGORITHM)
 
         return {
             'access_token': access_token,
