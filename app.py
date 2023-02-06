@@ -30,15 +30,6 @@ def register_extensions(app):
     with app.app_context():
         db.create_all()
 
-def load_data():
-    user_1 = User(username="Jack", password="Sd23%etu3", role="admin")
-    user_2 = User(username="Nike", password="gft556Hj&", role="user")
-
-    db.create_all()
-
-    with db.session.begin():
-        db.session.add_all([user_1, user_2])
-
 
 app = create_app(Config())
 app.debug = True
