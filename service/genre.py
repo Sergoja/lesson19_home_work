@@ -21,17 +21,7 @@ class GenreService:
 
         genre.name = data.get("name")
 
-        self.dao.update(genre)
-
-    def update_partial(self, data):
-        uid = data.get("id")
-
-        genre = self.get_one(uid)
-
-        if "name" in data:
-            genre.name = data.get("name")
-
-        self.dao.update(genre)
+        return self.dao.update(genre)
 
     def delete(self, rid):
         self.dao.delete(rid)

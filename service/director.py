@@ -21,17 +21,7 @@ class DirectorService:
 
         director.name = data.get("name")
 
-        self.dao.update(director)
-
-    def update_partial(self, data):
-        uid = data.get("id")
-
-        director = self.get_one(uid)
-
-        if "name" in data:
-            director.name = data.get("name")
-
-        self.dao.update(director)
+        return self.dao.update(director)
 
     def delete(self, rid):
         self.dao.delete(rid)
