@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_restx import Api
 
-from config import Config
-from dao.model.user import User
-from setup_db import db
+from configs.config import Config
+from configs.setup_db import db
+
 from views.auth import auth_ns
 from views.directors import director_ns
 from views.genres import genre_ns

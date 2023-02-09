@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import abort
 import jwt
 
-from config import Config
+from configs.config import Config
 
 
 def auth_required(func):

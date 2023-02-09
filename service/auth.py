@@ -1,7 +1,7 @@
 import jwt
 import datetime
 import calendar
-from config import Config
+from configs.config import Config
 from flask import abort
 
 from service.user import UserService

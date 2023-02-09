@@ -3,7 +3,7 @@ import hmac
 
 from dao.user import UserDAO
 import hashlib
-from config import Config
+from configs.config import Config
 
 
 class UserService:
