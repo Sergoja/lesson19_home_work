@@ -14,6 +14,9 @@ class UserDAO:
     def get_by_name(self, username):
         return self.session.query(User).filter(User.username == username).first()
 
+    def get_by_email(self, email):
+        return self.session.query(User).filter(User.email == email).first()
+
     def create(self, user_d):
         ent = User(**user_d)
         self.session.add(ent)
@@ -27,8 +30,11 @@ class UserDAO:
 
     def update(self, user_d):
         user = self.get_one(user_d.get("id"))
+        user.email = user_d.get("email")
         user.username = user_d.get("username")
+        user.user_surname = user_d.get("user_surname")
         user.password = user_d.get("password")
+        user.favorite_genre = user_d.get("favorite_genre")
         user.role = user_d.get("role")
 
         self.session.add(user)

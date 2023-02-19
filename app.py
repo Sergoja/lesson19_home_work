@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_restx import Api
 
 from configs.config import Config
@@ -15,6 +15,11 @@ def create_app(config_object):
     app = Flask(__name__)
     app.config.from_object(config_object)
     register_extensions(app)
+
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
     return app
 
 

@@ -19,6 +19,9 @@ class UserService:
     def get_by_name(self, username):
         return self.dao.get_by_name(username)
 
+    def get_by_email(self, email):
+        return self.dao.get_by_email(email)
+
     def create(self, user_d):
         user_d['password'] = self.get_hash(user_d['password'])
         return self.dao.create(user_d)

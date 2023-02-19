@@ -14,7 +14,7 @@ class MovieDAO:
         stmt = self.session.query(Movie)
         if status == 'new':
             stmt.order_by(Movie.year.desc())
-        return stmt.paginate(page=page, per_page=12)
+        return stmt.paginate(page=page, per_page=12).items
 
     def get_by_director_id(self, val):
         return self.session.query(Movie).filter(Movie.director_id == val).all()

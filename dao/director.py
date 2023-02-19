@@ -11,7 +11,7 @@ class DirectorDAO:
     def get_all(self, filters):
         page = filters.get('page')
         stmt = self.session.query(Director)
-        return stmt.paginate(page=page, per_page=12)
+        return stmt.paginate(page=page, per_page=12).items
 
     def create(self, director_d):
         ent = Director(**director_d)

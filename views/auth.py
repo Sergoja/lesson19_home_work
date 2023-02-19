@@ -1,8 +1,7 @@
 from flask import request
 from flask_restx import Resource, Namespace
 
-from configs.implemented import auth_service
-
+from configs.implemented import auth_service, user_service
 
 auth_ns = Namespace('auth')
 
@@ -33,3 +32,12 @@ class AuthView(Resource):
         tokens = auth_service.generate_token(username, password)
 
         return tokens, 201
+
+
+@auth_ns.route('/register')
+class AuthView(Resource):
+    def post(self):
+        req_json = request.json
+        user_service.create(req_json)
+
+        return 201
