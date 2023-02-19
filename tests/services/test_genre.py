@@ -38,7 +38,7 @@ class TestGenreService:
         assert genre.id is not None
 
     def test_get_all(self):
-        genres = self.genre_service.get_all()
+        genres = self.genre_service.get_all(filters=None)
 
         assert len(genres) > 0
 

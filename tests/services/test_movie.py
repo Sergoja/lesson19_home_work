@@ -2,6 +2,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
+from dao.model.director import Director
+from dao.model.genre import Genre
 from dao.model.movie import Movie
 from dao.movie import MovieDAO
 from service.movie import MovieService
@@ -11,6 +13,9 @@ from service.movie import MovieService
 def movie_dao():
     movie_dao = MovieDAO(None)
 
+    genre_one = Genre(id=1, name='Комедия')
+    director_one = Director(id=1, name='Тейлор Шеридан')
+
     movie_one = Movie(
         id=1,
         title='title1',
@@ -18,8 +23,8 @@ def movie_dao():
         trailer='https://trailer.com',
         year=1995,
         rating=5,
-        genre_id=3,
-        director_id=4,
+        genre_id=genre_one,
+        director_id=director_one,
     )
     movie_two = Movie(
         id=2,
@@ -28,8 +33,8 @@ def movie_dao():
         trailer='https://trailer.com',
         year=2015,
         rating=4,
-        genre_id=2,
-        director_id=1,
+        genre_id=genre_one.id,
+        director_id=director_one,
     )
     movie_three = Movie(
         id=3,
@@ -38,8 +43,9 @@ def movie_dao():
         trailer='https://trailer.com',
         year=2005,
         rating=2,
-        genre_id=4,
-        director_id=3,
+        genre_id=genre_one,
+        # genre='hor',
+        director_id=director_one,
     )
 
     movie_dao.get_one = MagicMock(return_value=movie_one)
@@ -63,7 +69,7 @@ class TestMovieService:
         assert movie.id is not None
 
     def test_get_all(self):
-        movies = self.movie_service.get_all()
+        movies = self.movie_service.get_all(filters=None)
 
         assert len(movies) > 0
 
@@ -84,10 +90,12 @@ class TestMovieService:
         }
 
         movie = self.movie_service.update(movie_d)
+        movie_id = movie.get_one(movie_d.get("id"))
 
-        assert movie.id is not None
+        assert movie_id is not None
 
     def test_delete(self):
         delete_completed = self.movie_service.delete(1)
 
         assert delete_completed is None
+
