@@ -33,7 +33,6 @@ class UserDAO:
         user.email = user_d.get("email")
         user.username = user_d.get("username")
         user.user_surname = user_d.get("user_surname")
-        user.password = user_d.get("password")
         user.favorite_genre = user_d.get("favorite_genre")
         user.role = user_d.get("role")
 

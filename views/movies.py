@@ -11,7 +11,7 @@ movie_ns = Namespace('movies')
 
 @movie_ns.route('/')
 class MoviesView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         filters = page_parser.parse_args()
         all_movies = movie_service.get_all(filters)
