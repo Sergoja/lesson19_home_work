@@ -31,6 +31,7 @@ class UserDAO:
     def update(self, user_d):
         user = self.get_one(user_d.get("id"))
         user.email = user_d.get("email")
+        user.password = user_d.get("password")
         user.username = user_d.get("username")
         user.user_surname = user_d.get("user_surname")
         user.favorite_genre = user_d.get("favorite_genre")
