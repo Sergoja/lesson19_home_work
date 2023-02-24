@@ -43,7 +43,7 @@ class AuthView(Resource):
         return 201
 
 
-@auth_ns.route('/login')
+@auth_ns.route('/login/')
 class AuthView(Resource):
     def post(self):
         req_json = request.json

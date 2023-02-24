@@ -24,6 +24,8 @@ class UserService:
 
     def create(self, user_d):
         user_d['password'] = self.get_hash(user_d['password'])
+        user_d['role'] = 'user'
+
         return self.dao.create(user_d)
 
     def update(self, user_d):

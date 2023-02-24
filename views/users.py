@@ -24,19 +24,34 @@ user_ns = Namespace('user')
 #         return "", 201, {'location': f'/users/{user.id}'}
 
 
-@user_ns.route('/<int:rid>')
+@user_ns.route('/')
 class UserView(Resource):
     @auth_required
-    def get(self, rid):
-        user = user_service.get_one(rid)
+    def get(self):
+        data = request.headers['Authorization']
+        token = data.split('Bearer ')[-1]
+
+        data = jwt.decode(token, Config.SECRET_HERE, algorithms=Config.JWT_ALGORITHM)
+        user = user_service.get_by_email(data["email"])
+
         sm_d = UserSchema().dump(user)
         return sm_d, 200
 
     @auth_required
-    def patch(self, rid):
+    def patch(self):
         req_json = request.json
-        req_json["id"] = rid
-        user_service.update(req_json)
+
+        data = request.headers['Authorization']
+        token = data.split('Bearer ')[-1]
+
+        data = jwt.decode(token, Config.SECRET_HERE, algorithms=Config.JWT_ALGORITHM)
+        user = user_service.get_by_email(data["email"])
+
+        user.username = req_json.get('name')
+        user.user_surname = req_json.get('surname')
+        user.favorite_genre = req_json.get('favourite_genre')
+
+        user_service.update(UserSchema().dump(user))
 
         return "", 204
 
