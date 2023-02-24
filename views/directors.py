@@ -11,7 +11,7 @@ director_ns = Namespace('directors')
 
 @director_ns.route('/')
 class DirectorsView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         filters = page_parser.parse_args()
         directors = director_service.get_all(filters)

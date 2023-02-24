@@ -11,7 +11,7 @@ genre_ns = Namespace('genres')
 
 @genre_ns.route('/')
 class GenresView(Resource):
-    @auth_required
+    # @auth_required
     def get(self):
         filters = page_parser.parse_args()
         genres = genre_service.get_all(filters)
